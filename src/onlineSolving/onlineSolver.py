@@ -462,7 +462,7 @@ if __name__ == '__main__' :
     givenBSize = None
     givenErr = None
     givingOrdering = None
-
+    givingEndObs = None
 
     if len(sys.argv) == 2:
         givenSolv =str(sys.argv[1])
@@ -477,12 +477,18 @@ if __name__ == '__main__' :
         givenErr =int(sys.argv[2])
         givenBSize = int(sys.argv[3])
 
-
     if len(sys.argv) == 5:
         givenSolv = str(sys.argv[1])
         givenErr =int(sys.argv[2])
         givenBSize = int(sys.argv[3])
         givingOrdering = str(sys.argv[4])
+
+    if len(sys.argv) == 6:
+        givenSolv = str(sys.argv[1])
+        givenErr =int(sys.argv[2])
+        givenBSize = int(sys.argv[3])
+        givOrdering = str(sys.argv[4])
+        givingEndObs = int(sys.argv[5])
 
 
     verb = False
@@ -490,16 +496,14 @@ if __name__ == '__main__' :
     nMachines = 1
 
     if givenBSize is None:
-        #     bucketSizes = [5]# [1,  5, 10, 30, 60]CPLEX
-        bucketSizes = [2, 10, 20, 30]# [1,  5, 10, 30, 60]
+        bucketSizes = [2]
     else:
         bucketSizes=[givenBSize]
 
 
     if givenErr is None:
-        instances = [0, 50, 100, 150, 200, 250, 300]
+        instances = [0]
     else:
-#         instances = [int(givenErr)]
         if givenErr == 200:
             instances = [int(givenErr),int(givenErr)+50,int(givenErr)+100]
         else:
@@ -507,30 +511,21 @@ if __name__ == '__main__' :
 
 
     if givenSolv is None:
-#         solvers = [CONST_H_myNF] #CONST_H_FMF
-        solvers = [CONST_H_myFF,CONST_H_myBFD,CONST_H_myBFR, CONST_H_myNF,CONST_H_myMRD,CONST_H_myMRR,CONST_H_mySS,CONST_H_myHA] #CONST_H_FMF CONST_H_CPLEX,CONST_H_FMF_CPLEX
+        solvers = [CONST_H_FMF]
     else:
         solvers =[givenSolv]
-        if givenSolv == CONST_H_FMF_CPLEX:
-            solvers = [CONST_H_FMF_CPLEX,CONST_H_myMRR_CPLEX]
-        if givenSolv == CONST_H_myFF_CPLEX:
-            solvers = [CONST_H_myFF_CPLEX,CONST_H_myMRD_CPLEX]
-        if givenSolv == CONST_H_myBFD_CPLEX:
-            solvers = [CONST_H_myBFD_CPLEX,CONST_H_mySS_CPLEX]
-        if givenSolv == CONST_H_myBFR_CPLEX:
-            solvers = [CONST_H_myBFR_CPLEX,CONST_H_myHA_CPLEX]
 
     if givingOrdering is None:
         orderings = [CONST_O_DDUR]
     else:
         orderings = [givingOrdering]
 
-    endObsWindow =   7* 24* 3600
-
+    if givingOrdering is None:
+        endObsWindow =   3600
+    else:
+        endObsWindow = givenEndObs
     ctsLim = None
-#     ctsLim =[]
-#     ctsLim.append((1000000.0*3600)*110)
-#     ctsLim.append((1000000.0*3600)*124)
+
 
     baseIn = "../data/"
     baseOut = "../../results/uncertain/res"
@@ -540,11 +535,8 @@ if __name__ == '__main__' :
     baseOutCplex = "../../results/uncertain/cplexStats"
 
 
-    #assert(endObsWindow%bucketSize == 0), "bucketSize must be a multiple of the endObsWindow"
-
     for ins in instances:
         fIn = "{0}allTasks_U{1}.csv".format(baseIn, ins)
-#         fIn = "{0}test.csv".format(baseIn)
 
         i = fIn.split("/")[-1].split(".")[0]
 
@@ -563,6 +555,5 @@ if __name__ == '__main__' :
                         CONST_F_CPLEX : "{0}_{1}.csv".format(baseOutCplex,    xp),
                         }
                     cleanFiles([dFiles[CONST_F_SOL],dFiles[CONST_F_USAGE],dFiles[CONST_F_LB],dFiles[CONST_F_TIME],dFiles[CONST_F_CPLEX]])
-
 
                     start(dFiles, verb, nMachines, bucketSize, (endObsWindow+bucketSize),solvName, ordering,ctsLim,CODE_ASSERT_HEU_WITH_CPLEX)

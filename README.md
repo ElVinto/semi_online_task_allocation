@@ -1,3 +1,23 @@
+
+# Semi Online Task Semi Online Task Allocation
+
+
+## Command Line 
+
+`python onlineSolver.py  heuristic error timeStep ordering`
+
+
+heu is an heuristic name [FMF, my_FF,myBFD, myBFR, myNF, myMRR, myMRD, mySS, myHA, FMF_CPLEX, myFF_CPLEX, myBFD_CPLEX, myBFR_CPLEX, myNF_CPLEX, myMRR_CPLEX, myMRD_CPLEX, mySS_CPLEX, myHA_CPLEX]
+heuristic = FMF by default.
+
+error in an integer representing the uncertainty in the duration, error in [0, 50, 100, 150, 200, 250].
+
+timeStep represents the time interval in seconds of a time step, timeStep in [1 .. 30]
+
+ordering represents the default task ordering, ordering in [Dec,Inc]
+
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/ElVinto/semi_online_task_allocation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
