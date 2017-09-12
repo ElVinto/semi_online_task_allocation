@@ -1,73 +1,37 @@
-# Semi Online Task Semi Online Task Allocation
+# Semi Online Task Semi Online Task Allocation Simulator
 
 This documents describes the different input parameters and output file of the semi-online simulator.
 
-## Command Line
+## Setup
 
+This tool required python 2.7 and cplex v 12.6 or greater.
+
+## Command Line
 ```
 `python onlineSolver.py `
 or 
 `python onlineSolver.py  heuristic error timeStep ordering`
 ```
 
-- `heu` is label denoting an solving heuristic adapted to the semi-online context. The list of possible heuristic label is presented in the next sections. By default 
-heuristic = FMF by default.
+- `heu` is label denoting an solving heuristic adapted to the semi-online context. The list of possible heuristic label is presented in  next section "Adapted Bin Packing Heuristics". The default heuristic is FMF (First Merge Fit).
 
-- `error` is an integer denoting of uncertainty in the task duration. The possible error in [0, 50, 100, 150, 200, 250].
+- `error` is an integer denoting of uncertainty in each task duration. Let d be the duration of a task, when the error is x, the expected duration utilised by heuristics is in between [d*(1-x%),d*(1+x%)]. The possible input errors in [0, 50, 100, 150, 200, 250, 350 400]. The default error is set to 0.
 
-- `timeStep` is an integer denoting the time period of each time step in seconds, timeStep in `N+`
+- `timeStep` is a positive integer denoting the time period in seconds of each time step in seconds. The default timeStep is set to 0.
 
 - `ordering` is a label representing the default task ordering, ordering in [Dec,Inc]
 
+## Adapted bin Packing Heuristics
+- `my_FF`: First Fit
+- `myBFD`: Best Fit on Duration
+- `myBFR`: Best Fit on Requirement
+- `myNF`: Next Fit 
+- `myMRR`: Max Rest on Requirement
+- `myMRD`: Max Rest on Duration
+- `mySS`: Sum Square
+- `myHA`: Harmonic
+All the above heuristics can be ran as the input of a RNIS local search algorithm implemented in  CPLEX. For this purpose, the heuristic label has to be followed by `_CPLEX`. Consequently the following heuristic strategies are also available: `FMF_CPLEX`, `myFF_CPLEX`, `myBFD_CPLEX`, `myBFR_CPLEX`, `myNF_CPLEX`, `myMRR_CPLEX`,`myMRD_CPLEX`, `mySS_CPLEX`, `myHA_CPLEX`.
 
-## List of heuristics
-- `FMF`: First Merge Fit
-- `my_FF`
-- `myBFD`
-- `myBFR`
-- `myNF`
-- `myMRR`
-- `myMRD`
-- `mySS`
-- `myHA`
+## Output files
 
-- `FMF_CPLEX`
-- `myFF_CPLEX`
-- `myBFD_CPLEX`
-- `myBFR_CPLEX`
-- `myNF_CPLEX`
-- `myMRR_CPLEX`
-- `myMRD_CPLEX`
-- `mySS_CPLEX`
-- `myHA_CPLEX`
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ElVinto/semi_online_task_allocation/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+When running the simulator with the default argumet, i.e. `python onlineSolver.py ` four output files are created in the folder `./results/uncertain/`.
