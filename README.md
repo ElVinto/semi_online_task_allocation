@@ -21,7 +21,7 @@ heuristic = FMF by default.
 
 
 ## List of heuristics
-- `FMF`
+- `FMF`: First Merge Fit
 - `my_FF`
 - `myBFD`
 - `myBFR`
