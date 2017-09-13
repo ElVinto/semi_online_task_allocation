@@ -47,7 +47,7 @@ When launching the command line `python onlineSolver.py heu err timeStep orderin
 
 ## Output files
 
-When launching the command line `python onlineSolver.py heu err timeStep ordering`, the simulator creates four output files  in the folder "./results/uncertain/", all terminating by `_alltasks_Uerr_heu_ordering_timeStep.csv`.
+When launching the command line `python onlineSolver.py heu err timeStep ordering`, the simulator creates three output files  in the folder "./results/uncertain/", all terminating by `_alltasks_Uerr_heu_ordering_timeStep.csv`.
 - File `usage` records a line per time step. The column respectively denote [time stamp of the start of time step in nanoseconds], [time stamp of the end of the time step in nanoseconds], [number of machines hosting at least a task during the current time step], [number of machines hosting at least a task during the current time step * size of time step in seconds]
 
 - File `res` records a line per assignement. The columns respectively denote [the task Id], [the machine Id], [time stamp of the arrival time of the task in nanoseconds], [time stamp of the time step in which the task will start in nanoseconds], [time stamp of the finishing time of the task in nanoseconds]
