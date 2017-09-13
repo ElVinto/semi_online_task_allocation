@@ -4,7 +4,7 @@ This document describes the different input parameters and output files of the s
 
 ## Setup
 
-This tool required python 2.7 and cplex v 12.6 or greater.
+This tool required python 2.7 and cplex v 12.6 or higher.
 
 ## Command Line
 ```
@@ -21,7 +21,7 @@ or
 
 - `timeStep` is a non negative integer denoting the size of each time step in seconds. The default timeStep is set to 0.
 
-- `ordering` is a label representing the task ordering. The default task ordering is DDUR (Decreasing Duration), the different options are listed in the section Ordering.
+- `ordering` is a label representing the task ordering. The default task ordering is DDUR (Decreasing Duration), the different options are listed in the section "Ordering".
 
 ## Adapted bin Packing Heuristics
 - `myFF`: First Fit
@@ -33,7 +33,7 @@ or
 - `mySS`: Sum Square
 - `myHA`: Harmonic
 
-All the above heuristics can be ran as the input of a RNIS local search algorithm implemented in  CPLEX. For this purpose, the heuristic label has to be followed by `_CPLEX`. Consequently the following heuristic strategies are also available: `FMF_CPLEX`, `myFF_CPLEX`, `myBFD_CPLEX`, `myBFR_CPLEX`, `myNF_CPLEX`, `myMRR_CPLEX`,`myMRD_CPLEX`, `mySS_CPLEX`, `myHA_CPLEX`.
+All the above heuristics can be ran as the input of a RNIS local search algorithm implemented in  CPLEX. For this purpose, the heuristic label has to be followed by `_CPLEX`. Consequently, the following heuristic strategies are also available: `FMF_CPLEX`, `myFF_CPLEX`, `myBFD_CPLEX`, `myBFR_CPLEX`, `myNF_CPLEX`, `myMRR_CPLEX`,`myMRD_CPLEX`, `mySS_CPLEX`, `myHA_CPLEX`.
 
 ## Ordering of tasks within the time step
 - `LIST` ordered by arrival time increasing
@@ -47,7 +47,7 @@ When launching the command line `python onlineSolver.py heu err timeStep orderin
 
 ## Output files
 
-When launching the command line `python onlineSolver.py heu err timeStep ordering`, the simulator creates four output files  in the folder "./results/uncertain/", all terminating by "_alltasks_U`err`_`heu`_`ordering`_`timeStep`.csv".
+When launching the command line `python onlineSolver.py heu err timeStep ordering`, the simulator creates four output files  in the folder "./results/uncertain/", all terminating by `_alltasks_Uerr_heu_ordering_timeStep.csv`.
 - File `usage` records a line per time step. The column respectively denote [time stamp of the start of time step in nanoseconds], [time stamp of the end of the time step in nanoseconds], [number of machines hosting at least a task during the current time step], [number of machines hosting at least a task during the current time step * size of time step in seconds]
 
 - File `res` records a line per assignement. The columns respectively denote [the task Id], [the machine Id], [time stamp of the arrival time of the task in nanoseconds], [time stamp of the time step in which the task will start in nanoseconds], [time stamp of the finishing time of the task in nanoseconds]
