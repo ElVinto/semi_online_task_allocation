@@ -32,6 +32,7 @@ or
 - `myMRD`: Max Rest on Duration
 - `mySS`: Sum Square
 - `myHA`: Harmonic
+
 All the above heuristics can be ran as the input of a RNIS local search algorithm implemented in  CPLEX. For this purpose, the heuristic label has to be followed by `_CPLEX`. Consequently the following heuristic strategies are also available: `FMF_CPLEX`, `myFF_CPLEX`, `myBFD_CPLEX`, `myBFR_CPLEX`, `myNF_CPLEX`, `myMRR_CPLEX`,`myMRD_CPLEX`, `mySS_CPLEX`, `myHA_CPLEX`.
 
 ## Ordering of tasks within the time step
