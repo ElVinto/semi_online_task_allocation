@@ -4,7 +4,7 @@ This document describes the different input parameters and output files of the s
 
 ## Setup
 
-This tool required python 2.7 and cplex v 12.6 or higher.
+This tool requires python 2.7 and cplex v 12.6 or higher.
 
 ## Command Line
 ```
